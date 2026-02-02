@@ -1,39 +1,80 @@
 export type Status = 'draft' | 'good-enough' | 'strong' | 'needs-attention' | 'red';
 
-export type ImpactScope = 'team' | 'multi-team-same-function' | 'multi-function-broad';
+export type Alignment = 'aligned' | 'mostly-aligned' | 'concerned' | '';
+
+// --- People & Roles (Step 2) ---
+
+export interface PlanStakeholder {
+  id: string;
+  name: string;
+  role: string;
+  mustAlign: boolean;
+}
+
+export interface PeopleRoles {
+  owner: { name: string; role: string; notes: string };
+  hrPartner: { name: string; role: string; notes: string };
+  sponsor: { name: string; role: string; notes: string };
+  stakeholders: PlanStakeholder[];
+}
+
+// --- Scope & Time (Step 3) ---
 
 export interface TieringAnswers {
-  impactScope: ImpactScope | '';
+  impactScope: 'team' | 'multi-team-same-function' | 'multi-function-broad' | 'other' | '';
+  impactScopeOther: string;
   roleChanges: boolean | null;
   identityStatusChange: boolean | null;
   reversible: boolean | null;
   moraleImpact: boolean | null;
-  ongoingOrOneTime: 'ongoing' | 'one-time' | '';
+  ongoingOrOneTime: 'ongoing' | 'one-time' | 'other' | '';
+  ongoingOrOneTimeOther: string;
   crossTeamDependencies: boolean | null;
   legalChallenges: boolean | null;
-  localOrGlobal: 'local' | 'global' | '';
+  localOrGlobal: 'local' | 'global' | 'other' | '';
+  localOrGlobalOther: string;
+}
+
+// --- Components Quest (Step 4) ---
+
+export interface ComponentEntry {
+  notes: string;
+  status: Status;
+  confidenceReason: string;
 }
 
 export interface ComponentAssessment {
-  vision: { notes: string; status: Status };
-  consensus: { notes: string; status: Status };
-  skills: { notes: string; status: Status };
-  incentives: { notes: string; status: Status };
-  resources: { notes: string; status: Status };
-  plan: { notes: string; status: Status };
+  vision: ComponentEntry;
+  skills: ComponentEntry;
+  incentives: ComponentEntry;
+  resources: ComponentEntry;
+  plan: ComponentEntry;
 }
 
-export interface Stakeholder {
-  name: string;
-  role: string;
+export interface StakeholderAlignmentEntry {
+  stakeholderId: string;
+  stakeholderName: string;
+  alignment: Alignment;
+  comment: string;
+}
+
+export interface StakeholderCheck {
+  alignments: StakeholderAlignmentEntry[];
   notes: string;
 }
 
-export interface StakeholderData {
-  owner: Stakeholder;
-  sponsor: Stakeholder;
-  hrPartner: Stakeholder;
+// --- Milestones (Step 5, Tier 2-3) ---
+
+export interface Milestone {
+  id: string;
+  title: string;
+  targetDate: string;
+  action: string;
+  message: string;
+  feedbackSignal: string;
 }
+
+// --- Gates (Step 6) ---
 
 export interface GateStatus {
   gate1_strategicClarity: Status;
@@ -44,6 +85,8 @@ export interface GateStatus {
   gate3_notes: string;
 }
 
+// --- Root plan model ---
+
 export interface ChangePlan {
   id: string;
   title: string;
@@ -52,11 +95,14 @@ export interface ChangePlan {
   updatedAt: string;
   currentStep: number;
   overallStatus: Status;
+  people: PeopleRoles;
   tiering: TieringAnswers;
   tierLevel: 'low' | 'medium' | 'high' | '';
-  timePressure: 'low' | 'moderate' | 'high' | '';
+  timePressure: 'low' | 'moderate' | 'high' | 'other' | '';
+  timePressureOther: string;
   components: ComponentAssessment;
-  stakeholders: StakeholderData;
+  stakeholderCheck: StakeholderCheck;
+  milestones: Milestone[];
   gates: GateStatus;
 }
 
@@ -69,32 +115,41 @@ export function createEmptyPlan(): ChangePlan {
     updatedAt: new Date().toISOString(),
     currentStep: 1,
     overallStatus: 'draft',
+    people: {
+      owner: { name: '', role: '', notes: '' },
+      hrPartner: { name: '', role: '', notes: '' },
+      sponsor: { name: '', role: '', notes: '' },
+      stakeholders: [],
+    },
     tiering: {
       impactScope: '',
+      impactScopeOther: '',
       roleChanges: null,
       identityStatusChange: null,
       reversible: null,
       moraleImpact: null,
       ongoingOrOneTime: '',
+      ongoingOrOneTimeOther: '',
       crossTeamDependencies: null,
       legalChallenges: null,
       localOrGlobal: '',
+      localOrGlobalOther: '',
     },
     tierLevel: '',
     timePressure: '',
+    timePressureOther: '',
     components: {
-      vision: { notes: '', status: 'draft' },
-      consensus: { notes: '', status: 'draft' },
-      skills: { notes: '', status: 'draft' },
-      incentives: { notes: '', status: 'draft' },
-      resources: { notes: '', status: 'draft' },
-      plan: { notes: '', status: 'draft' },
+      vision: { notes: '', status: 'draft', confidenceReason: '' },
+      skills: { notes: '', status: 'draft', confidenceReason: '' },
+      incentives: { notes: '', status: 'draft', confidenceReason: '' },
+      resources: { notes: '', status: 'draft', confidenceReason: '' },
+      plan: { notes: '', status: 'draft', confidenceReason: '' },
     },
-    stakeholders: {
-      owner: { name: '', role: '', notes: '' },
-      sponsor: { name: '', role: '', notes: '' },
-      hrPartner: { name: '', role: '', notes: '' },
+    stakeholderCheck: {
+      alignments: [],
+      notes: '',
     },
+    milestones: [],
     gates: {
       gate1_strategicClarity: 'draft',
       gate1_notes: '',

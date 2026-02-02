@@ -49,7 +49,7 @@ export function HomePage({ plans, onNewPlan, onOpenPlan, onExecuteMode }: HomePa
                       <span className="plan-title">
                         {plan.title || 'Untitled change'}
                       </span>
-                      <span className="plan-step">Step {plan.currentStep} of 5</span>
+                      <span className="plan-step">Step {plan.currentStep} of 6</span>
                     </div>
                     <div className="plan-row-meta">
                       <StatusBadge status={plan.overallStatus} />

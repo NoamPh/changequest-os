@@ -2,7 +2,7 @@ import type { ChangePlan, GateStatus, Status } from '../types';
 import { Tooltip } from '../components/Tooltip';
 import { StatusBadge } from '../components/StatusBadge';
 
-interface Step5Props {
+interface Step6Props {
   plan: ChangePlan;
   onChange: (updates: Partial<ChangePlan>) => void;
   onFinish: () => void;
@@ -81,7 +81,7 @@ function computeOverallStatus(plan: ChangePlan): Status {
   return 'good-enough';
 }
 
-export function Step5Gates({ plan, onChange, onFinish }: Step5Props) {
+export function Step6Gates({ plan, onChange, onFinish }: Step6Props) {
   const updateGate = (key: keyof GateStatus, value: string) => {
     const newGates = { ...plan.gates, [key]: value };
     const newPlan = { ...plan, gates: newGates };
@@ -167,15 +167,19 @@ export function Step5Gates({ plan, onChange, onFinish }: Step5Props) {
           </div>
           <div className="summary-row">
             <span>Time pressure:</span>
-            <span>{plan.timePressure || 'Not set'}</span>
+            <span>
+              {plan.timePressure === 'other'
+                ? plan.timePressureOther || 'Other'
+                : plan.timePressure || 'Not set'}
+            </span>
           </div>
           <div className="summary-row">
             <span>Owner:</span>
-            <span>{plan.stakeholders.owner.name || 'Not assigned'}</span>
+            <span>{plan.people.owner.name || 'Not assigned'}</span>
           </div>
           <div className="summary-row">
             <span>Sponsor:</span>
-            <span>{plan.stakeholders.sponsor.name || 'Not assigned'}</span>
+            <span>{plan.people.sponsor.name || 'Not assigned'}</span>
           </div>
 
           {hasRed && (

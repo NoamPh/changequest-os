@@ -1,10 +1,11 @@
 import { StepIndicator } from '../components/StepIndicator';
 import { WizardNav } from '../components/WizardNav';
 import { Step1CreateChange } from './Step1CreateChange';
-import { Step2ScopeTime } from './Step2ScopeTime';
-import { Step3Components } from './Step3Components';
-import { Step4Stakeholders } from './Step4Stakeholders';
-import { Step5Gates } from './Step5Gates';
+import { Step2PeopleRoles } from './Step2PeopleRoles';
+import { Step3ScopeTime } from './Step3ScopeTime';
+import { Step4Components } from './Step4Components';
+import { Step5Milestones } from './Step5Milestones';
+import { Step6Gates } from './Step6Gates';
 import type { ChangePlan } from '../types';
 
 interface PlanWizardProps {
@@ -13,7 +14,7 @@ interface PlanWizardProps {
   onExit: () => void;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 6;
 
 export function PlanWizard({ plan, onUpdate, onExit }: PlanWizardProps) {
   const step = plan.currentStep;
@@ -51,11 +52,12 @@ export function PlanWizard({ plan, onUpdate, onExit }: PlanWizardProps) {
 
       <main className="wizard-body">
         {step === 1 && <Step1CreateChange plan={plan} onChange={onUpdate} />}
-        {step === 2 && <Step2ScopeTime plan={plan} onChange={onUpdate} />}
-        {step === 3 && <Step3Components plan={plan} onChange={onUpdate} />}
-        {step === 4 && <Step4Stakeholders plan={plan} onChange={onUpdate} />}
-        {step === 5 && (
-          <Step5Gates plan={plan} onChange={onUpdate} onFinish={handleFinish} />
+        {step === 2 && <Step2PeopleRoles plan={plan} onChange={onUpdate} />}
+        {step === 3 && <Step3ScopeTime plan={plan} onChange={onUpdate} />}
+        {step === 4 && <Step4Components plan={plan} onChange={onUpdate} />}
+        {step === 5 && <Step5Milestones plan={plan} onChange={onUpdate} />}
+        {step === 6 && (
+          <Step6Gates plan={plan} onChange={onUpdate} onFinish={handleFinish} />
         )}
       </main>
 

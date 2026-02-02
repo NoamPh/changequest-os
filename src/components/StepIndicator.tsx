@@ -1,8 +1,9 @@
 const stepNames = [
   'Create Change',
+  'People & Roles',
   'Scope & Time',
   'Components',
-  'Stakeholders',
+  'Milestones',
   'Gates',
 ];
 

@@ -1,7 +1,7 @@
 import type { ChangePlan, TieringAnswers } from '../types';
 import { Tooltip } from '../components/Tooltip';
 
-interface Step2Props {
+interface Step3Props {
   plan: ChangePlan;
   onChange: (updates: Partial<ChangePlan>) => void;
 }
@@ -12,6 +12,7 @@ interface TieringQuestion {
   type: 'yesno' | 'select';
   options?: { value: string; label: string }[];
   hint?: string;
+  otherKey?: keyof TieringAnswers;
 }
 
 const tieringQuestions: TieringQuestion[] = [
@@ -23,7 +24,9 @@ const tieringQuestions: TieringQuestion[] = [
       { value: 'team', label: 'One team' },
       { value: 'multi-team-same-function', label: 'Multiple teams in the same function' },
       { value: 'multi-function-broad', label: 'Multiple functions or broad processes' },
+      { value: 'other', label: 'Other' },
     ],
+    otherKey: 'impactScopeOther',
   },
   {
     key: 'roleChanges',
@@ -56,7 +59,9 @@ const tieringQuestions: TieringQuestion[] = [
     options: [
       { value: 'ongoing', label: 'Ongoing — affects daily work' },
       { value: 'one-time', label: 'One-time — a discrete change' },
+      { value: 'other', label: 'Other' },
     ],
+    otherKey: 'ongoingOrOneTimeOther',
   },
   {
     key: 'crossTeamDependencies',
@@ -76,34 +81,42 @@ const tieringQuestions: TieringQuestion[] = [
     options: [
       { value: 'local', label: 'Local — one site or region' },
       { value: 'global', label: 'Global — across regions or the whole organization' },
+      { value: 'other', label: 'Other' },
     ],
+    otherKey: 'localOrGlobalOther',
   },
 ];
 
 function computeTier(t: TieringAnswers): 'low' | 'medium' | 'high' | '' {
-  const answered = Object.values(t).filter((v) => v !== null && v !== '').length;
+  const answered = Object.entries(t)
+    .filter(([k]) => !k.endsWith('Other'))
+    .filter(([, v]) => v !== null && v !== '')
+    .length;
   if (answered < 5) return '';
 
   let score = 0;
   if (t.impactScope === 'multi-function-broad') score += 3;
   else if (t.impactScope === 'multi-team-same-function') score += 2;
   else if (t.impactScope === 'team') score += 1;
+  else if (t.impactScope === 'other') score += 2;
 
   if (t.roleChanges) score += 2;
   if (t.identityStatusChange) score += 3;
   if (t.reversible === false) score += 2;
   if (t.moraleImpact) score += 2;
   if (t.ongoingOrOneTime === 'ongoing') score += 1;
+  else if (t.ongoingOrOneTime === 'other') score += 1;
   if (t.crossTeamDependencies) score += 1;
   if (t.legalChallenges) score += 3;
   if (t.localOrGlobal === 'global') score += 2;
+  else if (t.localOrGlobal === 'other') score += 1;
 
   if (score >= 12) return 'high';
   if (score >= 6) return 'medium';
   return 'low';
 }
 
-export function Step2ScopeTime({ plan, onChange }: Step2Props) {
+export function Step3ScopeTime({ plan, onChange }: Step3Props) {
   const updateTiering = (key: keyof TieringAnswers, value: TieringAnswers[typeof key]) => {
     const newTiering = { ...plan.tiering, [key]: value };
     const tierLevel = computeTier(newTiering);
@@ -145,18 +158,29 @@ export function Step2ScopeTime({ plan, onChange }: Step2Props) {
             )}
 
             {q.type === 'select' && q.options && (
-              <div className="select-group">
-                {q.options.map((opt) => (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    className={`select-btn ${plan.tiering[q.key] === opt.value ? 'selected' : ''}`}
-                    onClick={() => updateTiering(q.key, opt.value as never)}
-                  >
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
+              <>
+                <div className="select-group">
+                  {q.options.map((opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      className={`select-btn ${plan.tiering[q.key] === opt.value ? 'selected' : ''}`}
+                      onClick={() => updateTiering(q.key, opt.value as never)}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+                {q.otherKey && plan.tiering[q.key] === 'other' && (
+                  <input
+                    type="text"
+                    className="other-input"
+                    value={(plan.tiering[q.otherKey] as string) || ''}
+                    onChange={(e) => updateTiering(q.otherKey!, e.target.value as never)}
+                    placeholder="Please describe..."
+                  />
+                )}
+              </>
             )}
           </div>
         ))}
@@ -178,17 +202,26 @@ export function Step2ScopeTime({ plan, onChange }: Step2Props) {
         <label>Time pressure</label>
         <span className="field-hint">How much time pressure is on this change?</span>
         <div className="select-group">
-          {(['low', 'moderate', 'high'] as const).map((level) => (
+          {(['low', 'moderate', 'high', 'other'] as const).map((level) => (
             <button
               key={level}
               type="button"
               className={`select-btn ${plan.timePressure === level ? 'selected' : ''}`}
               onClick={() => onChange({ timePressure: level })}
             >
-              {level.charAt(0).toUpperCase() + level.slice(1)}
+              {level === 'other' ? 'Other' : level.charAt(0).toUpperCase() + level.slice(1)}
             </button>
           ))}
         </div>
+        {plan.timePressure === 'other' && (
+          <input
+            type="text"
+            className="other-input"
+            value={plan.timePressureOther}
+            onChange={(e) => onChange({ timePressureOther: e.target.value })}
+            placeholder="Please describe..."
+          />
+        )}
       </div>
     </div>
   );
