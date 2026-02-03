@@ -651,7 +651,31 @@ p {
   margin-bottom: var(--space-sm);
 }
 
-/* === Stakeholders (Step 4) === */
+/* === People & Roles (Step 1) === */
+.stakeholders-section {
+  margin-top: var(--space-lg);
+}
+
+.stakeholders-section h3 {
+  margin-bottom: 0;
+}
+
+.must-align-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.must-align-row input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* === Stakeholders (Step 5) === */
 .stakeholders-list {
   display: flex;
   flex-direction: column;
