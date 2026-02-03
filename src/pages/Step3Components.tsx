@@ -47,9 +47,16 @@ const componentMeta: {
 const statusOptions: Status[] = ['draft', 'good-enough', 'strong', 'needs-attention', 'red'];
 
 export function Step3Components({ plan, onChange }: Step3Props) {
+  const statusLabel = (s: Status): string =>
+    s === 'good-enough'
+      ? 'Good enough'
+      : s === 'needs-attention'
+        ? 'Needs attention'
+        : s.charAt(0).toUpperCase() + s.slice(1);
+
   const updateComponent = (
     key: keyof ComponentAssessment,
-    field: 'notes' | 'status',
+    field: 'notes' | 'status' | 'confidenceRationale',
     value: string
   ) => {
     const newComponents = {
@@ -88,7 +95,10 @@ export function Step3Components({ plan, onChange }: Step3Props) {
             </div>
 
             <div className="status-selector">
-              <span className="status-label">Status:</span>
+              <span className="status-label">Confidence:</span>
+              <span className="confidence-helper">
+                This reflects confidence and readiness, not how 'good' this is.
+              </span>
               <div className="status-options">
                 {statusOptions.map((s) => (
                   <button
@@ -98,14 +108,22 @@ export function Step3Components({ plan, onChange }: Step3Props) {
                     onClick={() => updateComponent(comp.key, 'status', s)}
                   >
                     <span className={`status-dot status-${s}`} />
-                    {s === 'good-enough'
-                      ? 'Good enough'
-                      : s === 'needs-attention'
-                        ? 'Needs attention'
-                        : s.charAt(0).toUpperCase() + s.slice(1)}
+                    {statusLabel(s)}
                   </button>
                 ))}
               </div>
+            </div>
+
+            <div className="field confidence-rationale">
+              <label>
+                What makes you feel this is <strong>{statusLabel(plan.components[comp.key].status)}</strong> right now?
+              </label>
+              <textarea
+                value={plan.components[comp.key].confidenceRationale ?? ''}
+                onChange={(e) => updateComponent(comp.key, 'confidenceRationale', e.target.value)}
+                placeholder="Optional — describe what's behind this confidence level..."
+                rows={2}
+              />
             </div>
           </div>
         ))}

@@ -14,13 +14,19 @@ export interface TieringAnswers {
   localOrGlobal: 'local' | 'global' | '';
 }
 
+export interface ComponentEntry {
+  notes: string;
+  status: Status;
+  confidenceRationale: string;
+}
+
 export interface ComponentAssessment {
-  vision: { notes: string; status: Status };
-  consensus: { notes: string; status: Status };
-  skills: { notes: string; status: Status };
-  incentives: { notes: string; status: Status };
-  resources: { notes: string; status: Status };
-  plan: { notes: string; status: Status };
+  vision: ComponentEntry;
+  consensus: ComponentEntry;
+  skills: ComponentEntry;
+  incentives: ComponentEntry;
+  resources: ComponentEntry;
+  plan: ComponentEntry;
 }
 
 export interface Stakeholder {
@@ -103,12 +109,12 @@ export function createEmptyPlan(): ChangePlan {
     tierLevel: '',
     timePressure: '',
     components: {
-      vision: { notes: '', status: 'draft' },
-      consensus: { notes: '', status: 'draft' },
-      skills: { notes: '', status: 'draft' },
-      incentives: { notes: '', status: 'draft' },
-      resources: { notes: '', status: 'draft' },
-      plan: { notes: '', status: 'draft' },
+      vision: { notes: '', status: 'draft', confidenceRationale: '' },
+      consensus: { notes: '', status: 'draft', confidenceRationale: '' },
+      skills: { notes: '', status: 'draft', confidenceRationale: '' },
+      incentives: { notes: '', status: 'draft', confidenceRationale: '' },
+      resources: { notes: '', status: 'draft', confidenceRationale: '' },
+      plan: { notes: '', status: 'draft', confidenceRationale: '' },
     },
     stakeholders: {
       owner: { name: '', role: '', notes: '' },
