@@ -35,6 +35,19 @@ export interface StakeholderData {
   hrPartner: Stakeholder;
 }
 
+export interface PeopleRolesStakeholder {
+  name: string;
+  role: string;
+  mustAlign: boolean;
+}
+
+export interface PeopleRoles {
+  changeOwner: string;
+  hrPartner: string;
+  sponsor: string;
+  stakeholders: PeopleRolesStakeholder[];
+}
+
 export interface GateStatus {
   gate1_strategicClarity: Status;
   gate1_notes: string;
@@ -52,6 +65,7 @@ export interface ChangePlan {
   updatedAt: string;
   currentStep: number;
   overallStatus: Status;
+  peopleRoles: PeopleRoles;
   tiering: TieringAnswers;
   tierLevel: 'low' | 'medium' | 'high' | '';
   timePressure: 'low' | 'moderate' | 'high' | '';
@@ -69,6 +83,12 @@ export function createEmptyPlan(): ChangePlan {
     updatedAt: new Date().toISOString(),
     currentStep: 1,
     overallStatus: 'draft',
+    peopleRoles: {
+      changeOwner: '',
+      hrPartner: '',
+      sponsor: '',
+      stakeholders: [],
+    },
     tiering: {
       impactScope: '',
       roleChanges: null,

@@ -1,4 +1,5 @@
 const stepNames = [
+  'People & Roles',
   'Create Change',
   'Scope & Time',
   'Components',
