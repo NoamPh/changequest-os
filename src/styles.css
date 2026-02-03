@@ -424,6 +424,26 @@ p {
 .status-dot.status-needs-attention { background: var(--color-needs-attention); }
 .status-dot.status-red { background: var(--color-red); }
 
+/* === Confidence helper & rationale === */
+.confidence-helper {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: var(--space-xs);
+}
+
+.confidence-rationale label {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.confidence-rationale textarea {
+  font-size: 0.8125rem;
+}
+
 /* === Step indicator === */
 .step-indicator {
   margin-bottom: var(--space-lg);
