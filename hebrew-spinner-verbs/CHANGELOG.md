@@ -7,7 +7,7 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.0.0]
 
 ### Added
-- 163 funny Hebrew spinner verbs in [`verbs.json`](./verbs.json).
+- 165 funny Hebrew spinner verbs in [`verbs.json`](./verbs.json).
 - Community `.github` issue template for suggesting verbs, a Credits section,
   and a `docs/RECORDING.md` demo-recording guide.
 - Feminine form for every verb in [`verbs.fem.json`](./verbs.fem.json) (one per
