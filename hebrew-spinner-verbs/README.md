@@ -27,7 +27,7 @@ npx hebrew-spinner-verbs --project
 # Add to Claude's built-in verbs instead of replacing them
 npx hebrew-spinner-verbs --append
 
-# Feminine forms (Hebrew-origin verbs only)
+# Feminine forms of every verb
 npx hebrew-spinner-verbs --feminine
 
 # Preview the JSON without writing anything
@@ -73,10 +73,11 @@ The list lives in [`verbs.json`](./verbs.json) — a plain string array. Edit or
 add your own, then re-run the installer. Present-tense masculine-singular forms
 (the `מ־` prefix) read best.
 
-Feminine forms of the Hebrew-origin verbs live in
-[`verbs.fem.json`](./verbs.fem.json) and are used with `--feminine`. Foreign
-loanwords (מרנדר, מדבג, מג'נרט…) have no natural Hebrew feminine form, so they're
-intentionally left out of that list.
+Feminine forms live in [`verbs.fem.json`](./verbs.fem.json), one per verb in the
+same order as `verbs.json`, and are used with `--feminine`. Native Hebrew verbs
+inflect naturally (מבשלת, מהרהרת); the transliterated loanwords (מרנדרת, מדבגת,
+מג'נרטת) are best-effort — they have no "correct" Hebrew feminine, so they just
+take the `־ת` ending.
 
 ## Uninstall
 
@@ -138,10 +139,10 @@ npx hebrew-spinner-verbs --print    # להדפיס את ה-JSON בלי לכתו�
 ### עריכת הפעלים
 
 הרשימה נמצאת ב-[`verbs.json`](./verbs.json) — מערך מחרוזות פשוט. ערכו/הוסיפו
-והריצו שוב. פעלים בהווה זכר יחיד (מ־...) עובדים הכי טוב. צורות הנקבה (רק לפעלים
-ממקור עברי) נמצאות ב-[`verbs.fem.json`](./verbs.fem.json) ומופעלות עם `--feminine`.
-פעלים לועזיים (מרנדר, מדבג, מג'נרט...) אין להם נטיית נקבה עברית טבעית ולכן הם לא
-נכללים שם.
+והריצו שוב. פעלים בהווה זכר יחיד (מ־...) עובדים הכי טוב. צורות הנקבה נמצאות
+ב-[`verbs.fem.json`](./verbs.fem.json) — אחת לכל פועל, באותו סדר — ומופעלות עם
+`--feminine`. הפעלים העבריים נוטים בטבעיות (מבשלת, מהרהרת); הפעלים הלועזיים
+(מרנדרת, מדבגת, מג'נרטת) הם best-effort, פשוט בתוספת ־ת.
 
 ### הערה על כיווניות (RTL)
 

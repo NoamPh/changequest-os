@@ -40,9 +40,13 @@ try {
   // 4. bad mode rejected
   assert.throws(() => applyVerbs({ settingsPath: join(dir, "d.json"), mode: "nope", verbs }));
 
-  // 5. feminine list is valid, non-empty, and actually feminine (ends in ת or ה)
+  // 5. feminine list mirrors verbs.json 1:1 and is actually feminine (ends in ת or ה)
   const fem = JSON.parse(readFileSync(new URL("../verbs.fem.json", import.meta.url)));
-  assert.ok(fem.length > 0, "verbs.fem.json should be non-empty");
+  assert.equal(
+    fem.length,
+    verbs.length,
+    "verbs.fem.json must have one feminine form per verb in verbs.json"
+  );
   assert.ok(
     fem.every((w) => /[תה]$/.test(w)),
     "feminine forms should end in ת or ה"

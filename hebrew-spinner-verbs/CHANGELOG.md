@@ -8,8 +8,9 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 - 111 funny Hebrew spinner verbs in [`verbs.json`](./verbs.json).
-- Feminine forms of the Hebrew-origin verbs in
-  [`verbs.fem.json`](./verbs.fem.json), selectable via the `--feminine` flag.
+- Feminine form for every verb in [`verbs.fem.json`](./verbs.fem.json) (one per
+  verb, same order), selectable via the `--feminine` flag. Loanword feminines are
+  best-effort.
 - `npx hebrew-spinner-verbs` CLI with `--global` / `--project`,
   `--append` / `--replace`, `--print`, and `--help`.
 - Safe merge into an existing `settings.json` — other keys are preserved, and
