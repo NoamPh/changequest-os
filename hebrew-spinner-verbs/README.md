@@ -27,6 +27,9 @@ npx hebrew-spinner-verbs --project
 # Add to Claude's built-in verbs instead of replacing them
 npx hebrew-spinner-verbs --append
 
+# Feminine forms (Hebrew-origin verbs only)
+npx hebrew-spinner-verbs --feminine
+
 # Preview the JSON without writing anything
 npx hebrew-spinner-verbs --print
 ```
@@ -69,6 +72,11 @@ your other settings**, and refuses to run if the file contains invalid JSON.
 The list lives in [`verbs.json`](./verbs.json) — a plain string array. Edit or
 add your own, then re-run the installer. Present-tense masculine-singular forms
 (the `מ־` prefix) read best.
+
+Feminine forms of the Hebrew-origin verbs live in
+[`verbs.fem.json`](./verbs.fem.json) and are used with `--feminine`. Foreign
+loanwords (מרנדר, מדבג, מג'נרט…) have no natural Hebrew feminine form, so they're
+intentionally left out of that list.
 
 ## Uninstall
 
@@ -113,6 +121,7 @@ PRs adding verbs or themes are welcome — see [CONTRIBUTING.md](./CONTRIBUTING.
 npx hebrew-spinner-verbs            # גלובלי (~/.claude/settings.json)
 npx hebrew-spinner-verbs --project  # רק לפרויקט הנוכחי
 npx hebrew-spinner-verbs --append   # להוסיף מעל ברירות המחדל
+npx hebrew-spinner-verbs --feminine # צורות נקבה (רק לפעלים ממקור עברי)
 npx hebrew-spinner-verbs --print    # להדפיס את ה-JSON בלי לכתוב
 ```
 
@@ -129,7 +138,10 @@ npx hebrew-spinner-verbs --print    # להדפיס את ה-JSON בלי לכתו�
 ### עריכת הפעלים
 
 הרשימה נמצאת ב-[`verbs.json`](./verbs.json) — מערך מחרוזות פשוט. ערכו/הוסיפו
-והריצו שוב. פעלים בהווה זכר יחיד (מ־...) עובדים הכי טוב.
+והריצו שוב. פעלים בהווה זכר יחיד (מ־...) עובדים הכי טוב. צורות הנקבה (רק לפעלים
+ממקור עברי) נמצאות ב-[`verbs.fem.json`](./verbs.fem.json) ומופעלות עם `--feminine`.
+פעלים לועזיים (מרנדר, מדבג, מג'נרט...) אין להם נטיית נקבה עברית טבעית ולכן הם לא
+נכללים שם.
 
 ### הערה על כיווניות (RTL)
 

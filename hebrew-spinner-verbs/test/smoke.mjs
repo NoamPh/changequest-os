@@ -40,6 +40,14 @@ try {
   // 4. bad mode rejected
   assert.throws(() => applyVerbs({ settingsPath: join(dir, "d.json"), mode: "nope", verbs }));
 
+  // 5. feminine list is valid, non-empty, and actually feminine (ends in ת or ה)
+  const fem = JSON.parse(readFileSync(new URL("../verbs.fem.json", import.meta.url)));
+  assert.ok(fem.length > 0, "verbs.fem.json should be non-empty");
+  assert.ok(
+    fem.every((w) => /[תה]$/.test(w)),
+    "feminine forms should end in ת or ה"
+  );
+
   console.log("✓ all smoke tests passed");
 } finally {
   rmSync(dir, { recursive: true, force: true });

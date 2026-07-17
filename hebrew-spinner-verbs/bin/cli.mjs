@@ -7,7 +7,6 @@ import { homedir } from "node:os";
 import { applyVerbs } from "../lib/apply.mjs";
 
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
-const verbs = JSON.parse(readFileSync(join(pkgRoot, "verbs.json"), "utf8"));
 
 const args = process.argv.slice(2);
 const has = (...flags) => flags.some((f) => args.includes(f));
@@ -16,6 +15,9 @@ if (has("-h", "--help")) {
   printHelp();
   process.exit(0);
 }
+
+const verbsFile = has("--feminine", "--fem") ? "verbs.fem.json" : "verbs.json";
+const verbs = JSON.parse(readFileSync(join(pkgRoot, verbsFile), "utf8"));
 
 const mode = has("--append") ? "append" : "replace";
 
@@ -54,6 +56,7 @@ Options:
   --project   Install to ./.claude/settings.json
   --append    Add to Claude's built-in verbs
   --replace   Use only these Hebrew verbs         (default)
+  --feminine  Use the feminine forms (verbs.fem.json, Hebrew-origin verbs)
   --print     Print the spinnerVerbs JSON block and exit (writes nothing)
   -h, --help  Show this help
 

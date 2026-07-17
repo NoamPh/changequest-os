@@ -10,6 +10,7 @@
     "bin",
     "lib",
     "verbs.json",
+    "verbs.fem.json",
     "settings.json",
     "install.sh",
     "README.md",
