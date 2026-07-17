@@ -638,4 +638,32 @@ hebrew-spinner-verbs/
 3. הרץ `node bin/cli.mjs --print` והראה לי את הפלט.
 4. אם אני מאשר — הרץ `node bin/cli.mjs` כדי להחיל את הפעלים גלובלית,
    ואמור לי לפתוח סשן חדש של Claude Code.
-5. אתחל git, קמט הכל ("Initial commit"), ושאל אם לפרסם ל-npm / GitHub.
+
+## דחיפה ל-GitHub
+
+5. אתחל git וקמט:
+   ```bash
+   git init -b main
+   git add -A
+   git commit -m "Initial commit: hebrew-spinner-verbs"
+   ```
+6. צור repo ציבורי חדש ודחוף. עם GitHub CLI (הכי מהיר):
+   ```bash
+   gh repo create hebrew-spinner-verbs --public --source=. --remote=origin --push
+   ```
+   או ידנית — צור repo ריק ב-github.com (בלי README), ואז:
+   ```bash
+   git remote add origin https://github.com/<USERNAME>/hebrew-spinner-verbs.git
+   git push -u origin main
+   ```
+7. אם שם המשתמש/repo שונה מ-`NoamPh/hebrew-spinner-verbs`, עדכן את ה-URLs
+   ב-`package.json` וב-`README.md` (homepage/repository/bugs והתגים).
+
+## פרסום ל-npm (אופציונלי)
+
+8. כדי ש-`npx hebrew-spinner-verbs` יעבוד לכולם:
+   ```bash
+   npm login
+   npm publish
+   ```
+   אחרי הפרסום אפשר לתייג גרסה: `git tag v1.0.0 && git push --tags`.
