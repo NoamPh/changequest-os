@@ -1,0 +1,12 @@
+{
+  "name": "hebrew-spinner-verbs",
+  "version": "1.0.0",
+  "description": "Funny Hebrew verbs for Claude Code's thinking spinner (מדרבק, מכווצץ, מסנטז, מפבלש).",
+  "author": {
+    "name": "NoamPh"
+  },
+  "homepage": "https://github.com/NoamPh/hebrew-spinner-verbs",
+  "repository": "https://github.com/NoamPh/hebrew-spinner-verbs",
+  "license": "MIT",
+  "keywords": ["hebrew", "spinner", "fun", "spinnerVerbs"]
+}

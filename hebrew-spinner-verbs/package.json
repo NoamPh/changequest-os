@@ -1,0 +1,46 @@
+{
+  "name": "hebrew-spinner-verbs",
+  "version": "1.0.0",
+  "description": "Replace Claude Code's thinking-spinner verbs with funny Hebrew ones (מדרבק, מכווצץ, מסנטז, מפבלש).",
+  "type": "module",
+  "bin": {
+    "hebrew-spinner-verbs": "bin/cli.mjs"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "verbs.json",
+    "settings.json",
+    "install.sh",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "print": "node bin/cli.mjs --print",
+    "test": "node test/smoke.mjs"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "spinner",
+    "spinnerVerbs",
+    "hebrew",
+    "עברית",
+    "cli",
+    "verbs",
+    "fun"
+  ],
+  "license": "MIT",
+  "author": "NoamPh",
+  "homepage": "https://github.com/NoamPh/hebrew-spinner-verbs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoamPh/hebrew-spinner-verbs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NoamPh/hebrew-spinner-verbs/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
