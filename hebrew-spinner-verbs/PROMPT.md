@@ -37,8 +37,8 @@ hebrew-spinner-verbs/
 ├── bin/cli.mjs             # ה-CLI (npx hebrew-spinner-verbs)
 ├── lib/apply.mjs           # לוגיקת מיזוג לתוך settings.json
 ├── test/smoke.mjs          # טסטים ללא תלויות
-├── verbs.json              # 168 פעלים בזכר (רשימת הספינר)
-├── verbs.fem.json          # 168 צורות נקבה, מקביל 1:1 ל-verbs.json
+├── verbs.json              # 169 פעלים בזכר (רשימת הספינר)
+├── verbs.fem.json          # 169 צורות נקבה, מקביל 1:1 ל-verbs.json
 ├── settings.json           # בלוק spinnerVerbs מוכן להעתקה (mode: replace)
 ├── install.sh              # עוטף את bin/cli.mjs (למי שאין npm)
 ├── package.json            # אריזת npm עם bin
@@ -51,7 +51,7 @@ hebrew-spinner-verbs/
 ```
 
 ═══════════════════════════════════════════════════════════════════════
-## הפעלים — verbs.json (168 פעלים, בזכר)
+## הפעלים — verbs.json (169 פעלים, בזכר)
 
 ```json
 [
@@ -222,7 +222,8 @@ hebrew-spinner-verbs/
   "מלגלג",
   "מדלוור",
   "מטלטל",
-  "מעתיק"
+  "מעתיק",
+  "מגלף"
 ]
 ```
 
@@ -399,7 +400,8 @@ hebrew-spinner-verbs/
   "מלגלגת",
   "מדלוורת",
   "מטלטלת",
-  "מעתיקה"
+  "מעתיקה",
+  "מגלפת"
 ]
 ```
 
@@ -577,7 +579,8 @@ hebrew-spinner-verbs/
       "מלגלג",
       "מדלוור",
       "מטלטל",
-      "מעתיק"
+      "מעתיק",
+      "מגלף"
     ]
   }
 }
