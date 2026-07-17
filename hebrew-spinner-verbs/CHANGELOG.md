@@ -7,7 +7,7 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.0.0]
 
 ### Added
-- 134 funny Hebrew spinner verbs in [`verbs.json`](./verbs.json).
+- 135 funny Hebrew spinner verbs in [`verbs.json`](./verbs.json).
 - Feminine form for every verb in [`verbs.fem.json`](./verbs.fem.json) (one per
   verb, same order), selectable via the `--feminine` flag. Loanword feminines are
   best-effort.
