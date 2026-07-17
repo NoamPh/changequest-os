@@ -15,6 +15,11 @@ playful, made-up Hebrew verbs. It's a thin, safe wrapper around the official
 
 ---
 
+## Demo
+
+_A short recording is on the way._ Want to capture one? See
+[`docs/RECORDING.md`](./docs/RECORDING.md) for a 30-second asciinema/GIF recipe.
+
 ## Quick start
 
 ```bash
@@ -102,6 +107,16 @@ manifest is included for discoverability, but the verbs are applied through
 ## Contributing
 
 PRs adding verbs or themes are welcome — see [CONTRIBUTING.md](./CONTRIBUTING.md).
+The fastest way is the ["Suggest a verb" issue template](../../issues/new/choose).
+
+## Credits
+
+Most of these verbs were dreamed up by friends riffing in a group chat — the
+sillier and more made-up, the better. Contributed an idea? Add your name or
+GitHub handle here in a PR.
+
+- Maintainer: [@NoamPh](https://github.com/NoamPh)
+- Verb contributors: _add yourself!_ 🌀
 
 ## License
 
